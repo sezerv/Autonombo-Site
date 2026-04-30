@@ -3,56 +3,86 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Autonombo</title>
+  <title>Autonombo — Coming Soon</title>
 
   <style>
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #0a0a0a;
-      color: #ffffff;
+      background: radial-gradient(circle at top, #111, #000);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
     }
 
     .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 80px 20px;
+      max-width: 800px;
+      padding: 40px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border: 1px solid #444;
+      border-radius: 20px;
+      font-size: 12px;
+      color: #aaa;
+      margin-bottom: 20px;
     }
 
     h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
+      font-size: 52px;
+      margin: 10px 0;
+      letter-spacing: 1px;
     }
 
-    h2 {
-      margin-top: 60px;
+    .subtitle {
+      font-size: 18px;
+      color: #bbb;
+      margin-bottom: 30px;
     }
 
-    p {
-      color: #aaa;
+    .description {
+      color: #888;
       line-height: 1.6;
+      margin-bottom: 40px;
     }
 
-    ul {
-      padding-left: 20px;
-      color: #ccc;
+    .section {
+      margin-top: 40px;
+      text-align: left;
     }
 
-    .btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 18px;
-      background: white;
-      color: black;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
+    .section h2 {
+      font-size: 16px;
+      color: #ddd;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .section ul {
+      list-style: none;
+      padding: 0;
+      color: #aaa;
+    }
+
+    .section ul li {
+      margin-bottom: 8px;
     }
 
     .footer {
-      margin-top: 80px;
-      font-size: 14px;
-      color: #666;
+      margin-top: 60px;
+      font-size: 12px;
+      color: #555;
+    }
+
+    .glow {
+      color: #fff;
+      text-shadow: 0 0 20px rgba(255,255,255,0.1);
     }
   </style>
 </head>
@@ -60,27 +90,43 @@
 <body>
   <div class="container">
 
-    <h1>Autonombo</h1>
-    <p>Engineering Autonomy for the Real World</p>
-    <a href="mailto:info@autonombo.com" class="btn">Contact</a>
+    <div class="badge">UNDER DEVELOPMENT</div>
 
-    <h2>Services</h2>
-    <ul>
-      <li>Autonomous Navigation & Path Planning</li>
-      <li>Sensor Fusion & Perception Systems</li>
-      <li>SLAM & Localization</li>
-      <li>AI-Based Decision Systems</li>
-      <li>Robotics & Mobility Solutions</li>
-    </ul>
+    <h1 class="glow">Autonombo</h1>
 
-    <h2>About</h2>
-    <p>
-      Autonombo develops scalable and high-reliability autonomy solutions for robotics,
-      intelligent transportation, and next-generation mobility systems.
-    </p>
+    <div class="subtitle">
+      Building the next generation of autonomous systems
+    </div>
+
+    <div class="description">
+      Autonombo is an early-stage robotics and AI company focused on developing 
+      scalable autonomy solutions for real-world mobility and intelligent systems.
+      <br><br>
+      We are currently in the company formation and R&D phase.
+    </div>
+
+    <div class="section">
+      <h2>Focus Areas</h2>
+      <ul>
+        <li>Autonomous Navigation & Path Planning</li>
+        <li>Sensor Fusion & Perception Systems</li>
+        <li>SLAM & Localization</li>
+        <li>AI-Based Decision Systems</li>
+        <li>Robotics & Mobility Platforms</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Status</h2>
+      <ul>
+        <li>Company formation in progress</li>
+        <li>R&D and prototype development</li>
+        <li>Early-stage system design</li>
+      </ul>
+    </div>
 
     <div class="footer">
-      © 2026 Autonombo
+      © 2026 Autonombo — All rights reserved
     </div>
 
   </div>
