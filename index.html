@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Autonombo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: #eaeaea;
+      background-color: #0a0a0a;
+      overflow-x: hidden;
+    }
+
+    /* GRID BACKGROUND */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: -1;
+    }
+
+    header {
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      background: rgba(10,10,10,0.7);
+      backdrop-filter: blur(10px);
+    }
+
+    header h1 {
+      font-size: 18px;
+      font-weight: 500;
+      color: #00ffd1;
+      letter-spacing: 1px;
+    }
+
+    nav a {
+      margin-left: 25px;
+      text-decoration: none;
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 140px 20px 100px;
+    }
+
+    .hero h2 {
+      font-size: 44px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      color: #888;
+      font-size: 16px;
+      letter-spacing: 1px;
+    }
+
+    .subtle {
+      margin-top: 15px;
+      color: #555;
+      font-size: 13px;
+      letter-spacing: 2px;
+    }
+
+    section {
+      max-width: 800px;
+      margin: auto;
+      padding: 80px 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h3 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    p {
+      color: #aaa;
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+      border-top: 1px solid #222;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Autonombo</h1>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#approach">Approach</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>Autonomy, Engineered for Reality</h2>
+  <p>Built on decades of research and real-world experience</p>
+  <div class="subtle">Perception · Navigation · Control</div>
+</section>
+
+<section id="about" class="fade">
+  <h3>About</h3>
+  <p>
+    Autonombo is an emerging technology initiative focused on autonomous mobility and intelligent robotic systems.
+  </p>
+  <p>
+    With over 20 years of combined experience in academia and industry, we develop systems that operate reliably in complex, real-world environments.
+  </p>
+</section>
+
+<section id="approach" class="fade">
+  <h3>Approach</h3>
+  <p>
+    Autonomy is a system-level challenge. From perception to decision-making and control, every layer must function seamlessly under real-world conditions.
+  </p>
+  <p>
+    Our focus is on building robust, scalable, and deployable systems — not just prototypes.
+  </p>
+</section>
+
+<section class="fade">
+  <h3>Status</h3>
+  <p>
+    Autonombo is currently in its formation phase. We are actively shaping our first systems and collaborations, with initial deployments planned in the near future.
+  </p>
+</section>
+
+<section id="contact" class="fade">
+  <h3>Contact</h3>
+  <p>
+    For collaborations, early partnerships, or inquiries:
+  </p>
+  <p><strong>sezerv@itu.edu.tr</strong></p>
+</section>
+
+<footer>
+  © 2026 Autonombo
+</footer>
+
+<script>
+  const sections = document.querySelectorAll("section");
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add("visible");
+      }
+    });
+  }, { threshold: 0.1 });
+
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+</script>
+
+</body>
+</html>
