@@ -9,6 +9,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
@@ -30,7 +34,8 @@
     }
 
     header {
-      padding: 20px 60px;
+      height: 60px;
+      padding: 0 60px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -38,6 +43,7 @@
       top: 0;
       background: rgba(10,10,10,0.7);
       backdrop-filter: blur(10px);
+      z-index: 1000;
     }
 
     header h1 {
@@ -89,6 +95,7 @@
       opacity: 0;
       transform: translateY(20px);
       transition: all 0.8s ease;
+      scroll-margin-top: 80px;
     }
 
     section.visible {
@@ -114,6 +121,26 @@
       border-top: 1px solid #222;
       font-size: 13px;
     }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      header {
+        padding: 0 20px;
+      }
+
+      nav a {
+        margin-left: 15px;
+        font-size: 13px;
+      }
+
+      .hero h2 {
+        font-size: 30px;
+      }
+
+      .hero {
+        padding: 120px 20px 80px;
+      }
+    }
   </style>
 </head>
 
@@ -134,7 +161,7 @@
   <div class="subtle">Perception · Navigation · Control</div>
 </section>
 
-<section id="about" class="fade">
+<section id="about">
   <h3>About</h3>
   <p>
     Autonombo is an emerging technology initiative focused on autonomous mobility and intelligent robotic systems.
@@ -144,7 +171,7 @@
   </p>
 </section>
 
-<section id="approach" class="fade">
+<section id="approach">
   <h3>Approach</h3>
   <p>
     Autonomy is a system-level challenge. From perception to decision-making and control, every layer must function seamlessly under real-world conditions.
@@ -154,14 +181,14 @@
   </p>
 </section>
 
-<section class="fade">
+<section>
   <h3>Status</h3>
   <p>
     Autonombo is currently in its formation phase. We are actively shaping our first systems and collaborations, with initial deployments planned in the near future.
   </p>
 </section>
 
-<section id="contact" class="fade">
+<section id="contact">
   <h3>Contact</h3>
   <p>
     For collaborations, early partnerships, or inquiries:
