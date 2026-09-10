@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Autonombo — Autonomous vehicles &amp; ground robotics</title>
 <meta name="description" content="Autonombo builds perception, sensor fusion, planning and control for autonomous vehicles and mobile ground robots. Consulting, custom robots and joint research.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f3f2f2'/%3E%3Crect x='5.5' y='5.5' width='21' height='21' fill='none' stroke='%23201e1d' stroke-width='3'/%3E%3Crect x='11' y='11' width='10' height='10' fill='%23ec3013'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&display=swap" rel="stylesheet">
@@ -32,8 +33,10 @@
   .wrap{max-width:1320px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
   header{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:var(--s6);
     padding:0 var(--pad);height:68px;background:rgba(18,17,16,0.82);backdrop-filter:blur(10px);border-bottom:2px solid var(--rule)}
-  .brand{display:flex;align-items:baseline;gap:10px;font-weight:800;font-size:17px;letter-spacing:0.02em;text-transform:uppercase;color:var(--ink)}
-  .brand span.mark{width:12px;height:12px;background:var(--accent);display:block}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:17px;letter-spacing:0.02em;text-transform:uppercase;color:var(--ink)}
+  .brand .mark{width:24px;height:24px;border:2px solid var(--ink);box-sizing:border-box;display:flex;align-items:center;justify-content:center;flex:none}
+  .brand .mark i{width:14px;height:14px;border:2px solid var(--ink);box-sizing:border-box;display:flex;align-items:center;justify-content:center}
+  .brand .mark i b{width:6px;height:6px;background:var(--accent);display:block}
   nav{display:flex;align-items:center;gap:clamp(12px,2.2vw,28px);font-size:13px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(234,231,231,0.66);min-width:0;flex-shrink:0}
   .nav-links{display:flex;align-items:center;gap:clamp(12px,2.2vw,28px)}
   nav a:hover{color:var(--ink)}
@@ -101,7 +104,6 @@
     .mobile-nav{display:block}
     header{gap:12px;padding-left:16px;padding-right:16px}
     .brand{font-size:14px;gap:8px}
-    .brand span.mark{width:10px;height:10px}
     nav{gap:10px;font-size:11px}
     nav a.btn-nav{font-size:11px;padding:8px 10px}
     .lang button{padding:6px 8px}
@@ -114,7 +116,7 @@
 <div class="grid-bg" aria-hidden="true"></div>
 
 <header>
-  <a class="brand" href="#top"><span class="mark"></span><span>Autonombo</span></a>
+  <a class="brand" href="#top"><span class="mark"><i><b></b></i></span><span>Autonombo</span></a>
   <nav>
     <span class="nav-links">
       <a href="#capabilities" data-t="navCap">Capabilities</a>
