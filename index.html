@@ -92,8 +92,13 @@
   #contact a.mail:hover{color:var(--bg);opacity:0.78}
   footer{border-top:2px solid var(--rule);padding:var(--s8) var(--pad);display:flex;flex-wrap:wrap;gap:var(--s4);justify-content:space-between;font-size:13px;letter-spacing:0.04em;color:rgba(234,231,231,0.5)}
   [data-reveal]{transition:opacity .7s ease,transform .7s ease}
+  .mobile-nav{display:none;position:sticky;top:68px;z-index:49;background:rgba(18,17,16,0.94);backdrop-filter:blur(10px);border-bottom:2px solid var(--rule)}
+  .mobile-nav div{display:flex;align-items:stretch}
+  .mobile-nav a{flex:1;padding:12px 10px;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(234,231,231,0.72);border-right:1px solid var(--rule-thin)}
+  .mobile-nav a:last-child{border-right:0}
   @media (max-width:640px){
     .nav-links{display:none}
+    .mobile-nav{display:block}
     header{gap:12px;padding-left:16px;padding-right:16px}
     .brand{font-size:14px;gap:8px}
     .brand span.mark{width:10px;height:10px}
@@ -101,6 +106,7 @@
     nav a.btn-nav{font-size:11px;padding:8px 10px}
     .lang button{padding:6px 8px}
     .marks .v,.marks .k{max-width:none}
+    section[id]{scroll-margin-top:112px}
   }
 </style>
 </head>
@@ -122,6 +128,14 @@
     </div>
   </nav>
 </header>
+
+<div class="mobile-nav">
+  <div>
+    <a href="#capabilities" data-t="navCap">Capabilities</a>
+    <a href="#services" data-t="navSvc">Services</a>
+    <a href="#about" data-t="navAbout">About</a>
+  </div>
+</div>
 
 <section id="top" class="wrap">
   <div class="kicker"><span class="dash"></span><span data-t="kicker"></span></div>
