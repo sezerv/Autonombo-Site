@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autonombo — Autonomous vehicles &amp; ground robotics</title>
+<meta name="description" content="Autonombo builds perception, sensor fusion, planning and control for autonomous vehicles and mobile ground robots. Consulting, custom robots and joint research.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#eae7e7; --ground:#121110; --accent:#ec3013; --accent-500:#ff563c; --bg:#f3f2f2;
+    --font:"Archivo",system-ui,sans-serif;
+    --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s6:24px; --s8:32px;
+    --rule:rgba(234,231,231,0.16); --rule-thin:rgba(234,231,231,0.14);
+    --pad:clamp(20px,5vw,64px);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  a:hover{color:var(--accent-500)}
+  ::selection{background:rgba(236,48,19,0.45)}
+  :focus{outline:none}
+  :focus-visible{outline:2px solid var(--accent-500);outline-offset:3px}
+  h1,h2,h3{font-weight:800;letter-spacing:-0.02em;margin:0}
+  p{margin:0}
+  .grid-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background-image:linear-gradient(rgba(234,231,231,0.045) 1px,transparent 1px),linear-gradient(90deg,rgba(234,231,231,0.045) 1px,transparent 1px);
+    background-size:44px 44px}
+  .wrap{max-width:1320px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+  header{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:var(--s6);
+    padding:0 var(--pad);height:68px;background:rgba(18,17,16,0.82);backdrop-filter:blur(10px);border-bottom:2px solid var(--rule)}
+  .brand{display:flex;align-items:baseline;gap:10px;font-weight:800;font-size:17px;letter-spacing:0.02em;text-transform:uppercase;color:var(--ink)}
+  .brand span.mark{width:12px;height:12px;background:var(--accent);display:block}
+  nav{display:flex;align-items:center;gap:clamp(12px,2.2vw,28px);font-size:13px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(234,231,231,0.66);min-width:0;flex-shrink:0}
+  .nav-links{display:flex;align-items:center;gap:clamp(12px,2.2vw,28px)}
+  nav a:hover{color:var(--ink)}
+  .btn{display:inline-flex;align-items:center;justify-content:flex-start;font-weight:800;font-size:13px;letter-spacing:0.06em;
+    text-transform:uppercase;padding:12px 18px;border:0;cursor:pointer}
+  .btn-primary{background:var(--accent);color:var(--bg)}
+  .btn-primary:hover{background:#dd2b0f;color:var(--bg)}
+  .btn-primary:active{background:#ae1800}
+  .btn-outline{border:2px solid rgba(234,231,231,0.28);color:var(--ink);background:transparent}
+  .btn-outline:hover{border-color:var(--ink);color:var(--ink)}
+  .btn-nav{font-size:12px;padding:9px 14px}
+  .lang{display:flex;align-items:stretch;border:2px solid rgba(234,231,231,0.28);margin-left:var(--s1);flex:none}
+  .lang button{font-family:var(--font);font-weight:800;font-size:11px;letter-spacing:0.1em;padding:7px 9px;border:0;cursor:pointer;background:transparent;color:rgba(234,231,231,0.66)}
+  .lang button[aria-pressed="true"]{background:#eae7e7;color:var(--ground)}
+  .kicker{display:flex;align-items:center;gap:var(--s3);font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent-500)}
+  .kicker span.dash{width:34px;height:2px;background:var(--accent);display:block;flex:none}
+  #top{padding-top:clamp(60px,11vh,124px);padding-bottom:clamp(40px,6vh,72px)}
+  h1{font-size:clamp(38px,7vw,86px);line-height:0.98;letter-spacing:-0.025em;margin:var(--s6) 0 0;max-width:17em;text-wrap:balance}
+  .lede{margin:var(--s6) 0 0;max-width:48ch;font-size:clamp(16px,1.5vw,19px);line-height:1.5;color:rgba(234,231,231,0.72);text-wrap:pretty}
+  .cta{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:var(--s8)}
+  .sect{border-top:2px solid var(--rule)}
+  .sect-title{font-weight:800;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(234,231,231,0.55)}
+  .marks{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+  .marks > div{padding:clamp(28px,4vh,44px) clamp(16px,2vw,32px) clamp(28px,4vh,44px) 0;border-bottom:1px solid var(--rule-thin)}
+  .marks .v{font-weight:800;font-size:clamp(26px,3vw,40px);line-height:1;letter-spacing:-0.03em}
+  .marks .k{margin-top:var(--s3);font-size:14px;line-height:1.5;color:rgba(234,231,231,0.66);max-width:32ch;text-wrap:pretty}
+  .lead-note{margin:var(--s4) 0 0;max-width:58ch;font-size:17px;color:rgba(234,231,231,0.72);text-wrap:pretty}
+  .domains{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s6)}
+  .domains span{font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:6px 10px;border:1px solid rgba(234,231,231,0.3);color:rgba(234,231,231,0.78)}
+  .caps{margin-top:clamp(32px,5vh,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));border-top:2px solid var(--rule);padding-bottom:clamp(48px,7vh,80px)}
+  .caps article{padding:var(--s6) clamp(16px,2vw,28px) var(--s8) 0;border-bottom:1px solid var(--rule-thin)}
+  .caps .no{font-weight:800;font-size:12px;letter-spacing:0.12em;color:var(--accent-500)}
+  .caps h3{font-size:clamp(20px,2.1vw,26px);letter-spacing:-0.015em;margin:var(--s3) 0}
+  .caps p{font-size:15px;line-height:1.6;color:rgba(234,231,231,0.68);text-wrap:pretty}
+  #services{background:rgba(234,231,231,0.035);padding-top:clamp(40px,6vh,72px);padding-bottom:clamp(48px,7vh,80px)}
+  .svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(24px,3.5vw,48px);margin-top:clamp(28px,4vh,48px)}
+  .svc article{border-top:2px solid var(--accent);padding-top:var(--s6)}
+  .svc h3{font-size:clamp(22px,2.3vw,31px);line-height:1.08;margin:0 0 var(--s4);max-width:22ch}
+  .svc p{margin:0 0 var(--s6);font-size:16px;line-height:1.6;color:rgba(234,231,231,0.72);max-width:46ch;text-wrap:pretty}
+  .svc ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--s2);font-size:14px;color:rgba(234,231,231,0.62)}
+  .svc li{display:flex;gap:var(--s3);align-items:baseline;border-top:1px solid var(--rule-thin);padding-top:var(--s2)}
+  .svc li b{color:var(--accent-500);font-weight:800}
+  #about{padding-top:clamp(40px,6vh,72px);padding-bottom:clamp(48px,7vh,80px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(28px,5vw,64px)}
+  #about .sect-title{display:block;margin-bottom:var(--s6)}
+  #about p{font-size:17px;line-height:1.6;max-width:48ch;text-wrap:pretty;color:rgba(234,231,231,0.72)}
+  #about p:first-of-type{color:rgba(234,231,231,0.8)}
+  #about p + p{margin-top:var(--s4)}
+  .rows{display:flex;flex-direction:column;border-top:2px solid var(--rule);margin-top:var(--s6)}
+  .rows div{display:flex;justify-content:space-between;gap:var(--s4);padding:var(--s3) 0;border-bottom:1px solid var(--rule-thin);font-size:14px}
+  .rows .k{letter-spacing:0.06em;text-transform:uppercase;color:rgba(234,231,231,0.55)}
+  .rows .v{font-weight:600;text-align:right}
+  #contact{background:var(--accent);color:var(--bg);padding-top:clamp(48px,8vh,96px);padding-bottom:clamp(48px,8vh,96px)}
+  #contact .label{font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;opacity:0.85}
+  #contact h2{font-size:clamp(32px,5.5vw,68px);line-height:1;letter-spacing:-0.025em;margin:var(--s4) 0 var(--s6);max-width:24ch}
+  #contact a.mail{display:inline-flex;font-weight:800;font-size:clamp(18px,2.4vw,30px);letter-spacing:-0.01em;color:var(--bg);border-bottom:3px solid var(--bg);padding-bottom:4px}
+  #contact a.mail:hover{color:var(--bg);opacity:0.78}
+  footer{border-top:2px solid var(--rule);padding:var(--s8) var(--pad);display:flex;flex-wrap:wrap;gap:var(--s4);justify-content:space-between;font-size:13px;letter-spacing:0.04em;color:rgba(234,231,231,0.5)}
+  [data-reveal]{transition:opacity .7s ease,transform .7s ease}
+  @media (max-width:640px){
+    .nav-links{display:none}
+    header{gap:12px;padding-left:16px;padding-right:16px}
+    .brand{font-size:14px;gap:8px}
+    .brand span.mark{width:10px;height:10px}
+    nav{gap:10px;font-size:11px}
+    nav a.btn-nav{font-size:11px;padding:8px 10px}
+    .lang button{padding:6px 8px}
+    .marks .v,.marks .k{max-width:none}
+  }
+</style>
+</head>
+<body>
+<div class="grid-bg" aria-hidden="true"></div>
+
+<header>
+  <a class="brand" href="#top"><span class="mark"></span><span>Autonombo</span></a>
+  <nav>
+    <span class="nav-links">
+      <a href="#capabilities" data-t="navCap">Capabilities</a>
+      <a href="#services" data-t="navSvc">Services</a>
+      <a href="#about" data-t="navAbout">About</a>
+    </span>
+    <a href="#contact" class="btn btn-primary btn-nav" data-t="navContact">Contact</a>
+    <div class="lang">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="tr" aria-pressed="false">TR</button>
+    </div>
+  </nav>
+</header>
+
+<section id="top" class="wrap">
+  <div class="kicker"><span class="dash"></span><span data-t="kicker"></span></div>
+  <h1 data-t="heroTitle"></h1>
+  <p class="lede" data-t="heroBody"></p>
+  <div class="cta">
+    <a class="btn btn-primary" href="#services" data-t="ctaPrimary"></a>
+    <a class="btn btn-outline" href="#contact" data-t="ctaSecondary"></a>
+  </div>
+</section>
+
+<section class="sect" data-reveal>
+  <div class="wrap marks" id="marks"></div>
+</section>
+
+<section id="capabilities" data-reveal>
+  <div class="wrap" style="padding-top:clamp(40px,6vh,72px)">
+    <h2 class="sect-title" data-t="capTitle"></h2>
+    <p class="lead-note" data-t="capIntro"></p>
+    <div class="domains" id="domains"></div>
+  </div>
+  <div class="wrap caps" id="caps"></div>
+</section>
+
+<section id="services" class="sect" data-reveal>
+  <div class="wrap">
+    <h2 class="sect-title" data-t="svcTitle"></h2>
+    <div class="svc" id="svc"></div>
+  </div>
+</section>
+
+<section class="sect" data-reveal>
+  <div class="wrap" id="about">
+    <div>
+      <h2 class="sect-title" data-t="aboutTitle"></h2>
+      <p data-t="about1"></p>
+      <p data-t="about2"></p>
+      <p data-t="about3"></p>
+    </div>
+    <div>
+      <h2 class="sect-title" data-t="statusTitle"></h2>
+      <p data-t="statusBody"></p>
+      <div class="rows" id="status"></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" data-reveal>
+  <div class="wrap">
+    <div class="label" data-t="navContact"></div>
+    <h2 data-t="contactTitle"></h2>
+    <a class="mail" href="mailto:info@autonombo.com">info@autonombo.com</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Autonombo</span>
+  <span data-t="footerNote"></span>
+</footer>
+
+<script>
+const COPY = {
+  en: {
+    navCap:"Capabilities", navSvc:"Services", navAbout:"About", navContact:"Contact",
+    kicker:"Autonomous vehicles & ground robotics",
+    heroTitle:"Autonomy, engineered for reality.",
+    heroBody:"We build the perception, fusion, planning and control layers that let vehicles and mobile robots work outside the lab — and we build the robots themselves.",
+    ctaPrimary:"What we do", ctaSecondary:"Start a conversation",
+    marks:[
+      {v:"20+ years",k:"A team built around specialists with more than two decades on these problems, working alongside a younger generation of researchers"},
+      {v:"Istanbul Technical University",k:"The company grew out of ITU's long-established research ecosystem"},
+      {v:"Research + field",k:"Dozens of completed academic and industrial projects — the ones that produced real vehicles and real robots"}
+    ],
+    capTitle:"Capabilities",
+    capIntro:"Autonomy is a system-level problem, and it is a similar problem in a passenger car and in a field robot. We work across the whole stack, because that is where the failures actually live.",
+    domains:["Autonomous driving & ADAS","Vehicle dynamics and control","Mobile ground robots","Shared & remote autonomy","Sensor setup and calibration"],
+    capabilities:[
+      {no:"01",title:"Perception",body:"Detection, tracking and scene understanding from camera, lidar and radar."},
+      {no:"02",title:"Sensor fusion",body:"Calibrated multi-sensor state estimation and localisation."},
+      {no:"03",title:"Planning",body:"Behaviour and motion planning for structured roads and unstructured terrain, with predictable failure modes."},
+      {no:"04",title:"Control",body:"Computing the control signals that carry out the planned motion — selecting and tuning the right controller for each problem: demanding dynamics, limited onboard compute, tight constraints."},
+      {no:"05",title:"Simulation and field testing",body:"Setting up the simulation environment a problem needs and planning the test procedures that validate it on the vehicle or robot."}
+    ],
+    svcTitle:"How we work with you",
+    services:[
+      {title:"Custom autonomous ground robots",
+       body:"Purpose-built autonomous and semi-autonomous mobile platforms, specified around your operation and taken all the way to field trials.",
+       points:["Inspection, logistics and field operations","Full autonomy or shared autonomy with remote supervision","Design, integration and validation from prototype to field"]},
+      {title:"Consulting for companies that need autonomy",
+       body:"For teams that know what they want to achieve but not yet how: we map the problem with you, recommend a route, and stay on it while it is solved.",
+       points:["Feasibility, roadmap and system architecture guidance","Sensor and compute hardware selection","Algorithm selection — and new algorithm design where nothing off the shelf fits","Simulation and field-test strategy"]},
+      {title:"Joint research with industry",
+       body:"Because we come from both worlds — real vehicles and robots on one side, an academic track record on the other — we can turn a company problem into publishable research as well as a working system.",
+       points:["Joint and grant-funded research projects","Problem definitions that produce academic output","Thesis and internship collaborations"]}
+    ],
+    aboutTitle:"About",
+    about1:"Autonombo is a technology company working on autonomous mobility and intelligent robotic systems. It grew out of the Istanbul Technical University ecosystem, where much of our research and early engineering was done.",
+    about2:"The team spans every level of research — undergraduate, master's, doctoral and postdoctoral — with active researchers who have contributed to the autonomy literature and led pioneering projects. Between them they have delivered dozens of academic and industrial projects.",
+    about3:"Autonombo was founded in 2026 by Prof. Dr. Volkan Sezer as an R&D company at ITU Arı Teknokent.",
+    statusTitle:"Status",
+    statusBody:"Currently in formation phase. We are shaping our first systems and collaborations, with initial deployments planned in the near future.",
+    status:[{k:"Phase",v:"Formation"},{k:"Origin",v:"Istanbul Technical University"},{k:"Base",v:"Istanbul, Türkiye"},{k:"Open to",v:"Partners & pilots"}],
+    contactTitle:"Collaborations, early partnerships, inquiries.",
+    footerNote:"Perception · Sensor fusion · Planning · Control"
+  },
+  tr: {
+    navCap:"Yetkinlikler", navSvc:"Hizmetler", navAbout:"Hakkında", navContact:"İletişim",
+    kicker:"Otonom araçlar ve kara robotları",
+    heroTitle:"Sahada çalışan otonomi.",
+    heroBody:"Araçların ve mobil robotların laboratuvar dışında da çalışmasını sağlayan algı, füzyon, planlama ve kontrol katmanlarını kuruyoruz — ve robotların kendisini de.",
+    ctaPrimary:"Ne yapıyoruz", ctaSecondary:"Görüşelim",
+    marks:[
+      {v:"20+ yıl",k:"Bu problemler üzerinde yirmi yılı aşkın süredir çalışan uzmanların, daha genç araştırmacılarla birlikte kurduğu bir ekip"},
+      {v:"İstanbul Teknik Üniversitesi",k:"Şirket, köklü İTÜ araştırma ekosisteminden doğdu"},
+      {v:"Akademi + saha",k:"Gerçek araç ve robotların ortaya çıktığı onlarca akademik ve endüstriyel proje tamamlandı"}
+    ],
+    capTitle:"Yetkinlikler",
+    capIntro:"Otonomi sistem düzeyinde bir problem; bir binek araçta da bir saha robotunda da benzer problem. Hatalar katmanların arasında yaşadığı için yığının bütününde çalışıyoruz.",
+    domains:["Otonom sürüş ve ADAS","Araç dinamiği ve kontrolü","Mobil kara robotları","Yarı otonom ve uzaktan denetimli sistemler","Sensör kurgusu ve kalibrasyon"],
+    capabilities:[
+      {no:"01",title:"Algı",body:"Kamera, lidar ve radardan tespit, takip, anlam çıkarma."},
+      {no:"02",title:"Sensör füzyonu",body:"Kalibre edilmiş çok sensörlü durum tahmini ve konumlama."},
+      {no:"03",title:"Planlama",body:"Yapılandırılmış yollar ve zorlu arazi için davranış ve hareket planlama; öngörülebilir hata modlarıyla."},
+      {no:"04",title:"Kontrol",body:"Planlanan hareketi gerçekleştirmek için gerekli kontrol sinyallerinin hesabı; her problem için (zorlu dinamikler, kısıtlı hesaplama gücü vb.) uygun kontrolör tekniğini seçerek ve ayarlayarak."},
+      {no:"05",title:"Simülasyon ve saha testleri",body:"Gerekli simülasyon ortamının kurulması ve test prosedürlerinin planlanması."}
+    ],
+    svcTitle:"Nasıl çalışıyoruz",
+    services:[
+      {title:"Özel otonom kara robotları",
+       body:"İhtiyacınıza göre tanımlanan, entegre edilen ve saha denemelerine kadar götürülen otonom ve yarı otonom mobil platformlar.",
+       points:["Denetim, lojistik ve saha operasyonları","Tam otonomi veya uzaktan denetimli paylaşımlı otonomi","Prototipten sahaya: tasarım, entegrasyon ve doğrulama"]},
+      {title:"Otonomi ihtiyacı olan firmalara danışmanlık",
+       body:"Ne yapmak istediğini bilen ama nasılına henüz karar vermemiş ekipler için: problemi birlikte tanımlıyor, bir yol öneriyor ve çözülene kadar birlikte yürüyoruz.",
+       points:["Fizibilite, yol haritası ve sistem mimarisi önerileri","Sensör ve hesaplama donanımı seçimi","Algoritma seçimi — hazır çözüm yetmiyorsa yeni algoritma tasarımı","Simülasyon ve saha deneme stratejisi"]},
+      {title:"Firmalarla ortak araştırma",
+       body:"Hem gerçek araç ve robotlarla saha deneyimimiz hem akademik geçmişimiz olduğu için, bir şirket problemini çalışan bir sisteme ve yayına dönüşebilecek bir araştırmaya birlikte taşıyabiliyoruz.",
+       points:["Ortak ve destekli araştırma projeleri","Akademik çıktı üreten problem tanımları","Lisansüstü tez ve staj iş birlikleri"]}
+    ],
+    aboutTitle:"Hakkında",
+    about1:"Autonombo, otonom hareketlilik ve akıllı robotik sistemler üzerine çalışan bir teknoloji şirketi. Araştırmalarımızın ve ilk mühendislik çalışmalarımızın büyük bölümünün yürütüldüğü İstanbul Teknik Üniversitesi ekosisteminden doğdu.",
+    about2:"Ekipte lisanstan doktora sonrasına kadar her seviyeden, araştırmasını hâlen sürdüren araştırmacılar var; otonomi literatürüne katkı sağlamış ve öncü projelere imza atmış bir kadro. Bugüne kadar onlarca akademik ve endüstriyel projeyi başarıyla tamamladık.",
+    about3:"Autonombo, 2026 yılında Prof. Dr. Volkan Sezer tarafından İTÜ Arı Teknokent'te bir Ar-Ge firması olarak kurulmuştur.",
+    statusTitle:"Durum",
+    statusBody:"Şu anda kuruluş aşamasındayız. İlk sistemlerimizi ve iş birliklerimizi şekillendiriyor, yakın gelecekte ilk saha uygulamalarını planlıyoruz.",
+    status:[{k:"Aşama",v:"Kuruluş"},{k:"Kökeni",v:"İstanbul Teknik Üniversitesi"},{k:"Merkez",v:"İstanbul, Türkiye"},{k:"Açığız",v:"Ortaklık ve pilotlar"}],
+    contactTitle:"İş birlikleri, erken ortaklıklar, sorular.",
+    footerNote:"Algı · Sensör füzyonu · Planlama · Kontrol"
+  }
+};
+
+function el(tag, cls, text){ const n=document.createElement(tag); if(cls) n.className=cls; if(text!=null) n.textContent=text; return n; }
+
+function render(lang){
+  const t = COPY[lang] || COPY.en;
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-t]").forEach(n => { const v = t[n.dataset.t]; if(typeof v === "string") n.textContent = v; });
+
+  const marks = document.getElementById("marks"); marks.innerHTML = "";
+  t.marks.forEach(m => { const d=el("div"); d.appendChild(el("div","v",m.v)); d.appendChild(el("div","k",m.k)); marks.appendChild(d); });
+
+  const dom = document.getElementById("domains"); dom.innerHTML = "";
+  t.domains.forEach(d => dom.appendChild(el("span",null,d)));
+
+  const caps = document.getElementById("caps"); caps.innerHTML = "";
+  t.capabilities.forEach(c => { const a=el("article"); a.appendChild(el("div","no",c.no)); a.appendChild(el("h3",null,c.title)); a.appendChild(el("p",null,c.body)); caps.appendChild(a); });
+
+  const svc = document.getElementById("svc"); svc.innerHTML = "";
+  t.services.forEach(s => {
+    const a=el("article"); a.appendChild(el("h3",null,s.title)); a.appendChild(el("p",null,s.body));
+    const ul=el("ul"); s.points.forEach(p => { const li=el("li"); li.appendChild(el("b",null,"—")); li.appendChild(el("span",null,p)); ul.appendChild(li); });
+    a.appendChild(ul); svc.appendChild(a);
+  });
+
+  const st = document.getElementById("status"); st.innerHTML = "";
+  t.status.forEach(r => { const d=el("div"); d.appendChild(el("span","k",r.k)); d.appendChild(el("span","v",r.v)); st.appendChild(d); });
+
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+  document.title = lang === "tr"
+    ? "Autonombo — Otonom araçlar ve kara robotları"
+    : "Autonombo — Autonomous vehicles & ground robotics";
+}
+
+let stored = null;
+try { stored = localStorage.getItem("autonombo-lang"); } catch(e){}
+const initial = stored || "en";
+render(initial);
+
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => {
+  render(b.dataset.lang);
+  try { localStorage.setItem("autonombo-lang", b.dataset.lang); } catch(e){}
+}));
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(!e.isIntersecting) return; e.target.style.opacity="1"; e.target.style.transform="none"; io.unobserve(e.target); });
+}, { threshold: 0.08 });
+document.querySelectorAll("[data-reveal]").forEach(n => {
+  if(n.getBoundingClientRect().top > window.innerHeight * 0.9){ n.style.opacity="0"; n.style.transform="translateY(18px)"; }
+  io.observe(n);
+});
+</script>
+</body>
+</html>
