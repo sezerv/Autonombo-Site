@@ -84,6 +84,8 @@
   #about p{font-size:17px;line-height:1.6;max-width:48ch;text-wrap:pretty;color:rgba(234,231,231,0.72)}
   #about p:first-of-type{color:rgba(234,231,231,0.8)}
   #about p + p{margin-top:var(--s4)}
+  #about3 a{color:var(--accent-500);border-bottom:1px solid rgba(255,86,60,0.5);padding-bottom:1px}
+  #about3 a:hover{color:var(--ink);border-bottom-color:var(--ink)}
   .rows{display:flex;flex-direction:column;border-top:2px solid var(--rule);margin-top:var(--s6)}
   .rows div{display:flex;justify-content:space-between;gap:var(--s4);padding:var(--s3) 0;border-bottom:1px solid var(--rule-thin);font-size:14px}
   .rows .k{letter-spacing:0.06em;text-transform:uppercase;color:rgba(234,231,231,0.55)}
@@ -176,7 +178,7 @@
       <h2 class="sect-title" data-t="aboutTitle"></h2>
       <p data-t="about1"></p>
       <p data-t="about2"></p>
-      <p data-t="about3"></p>
+      <p id="about3"></p>
     </div>
     <div>
       <h2 class="sect-title" data-t="statusTitle"></h2>
@@ -237,7 +239,10 @@ const COPY = {
     aboutTitle:"About",
     about1:"Autonombo is a technology company working on autonomous mobility and intelligent robotic systems. It grew out of the Istanbul Technical University ecosystem, where much of our research and early engineering was done.",
     about2:"The team spans every level of research — undergraduate, master's, doctoral and postdoctoral — with active researchers who have contributed to the autonomy literature and led pioneering projects. Between them they have delivered dozens of academic and industrial projects.",
-    about3:"Autonombo was founded in 2026 by Prof. Dr. Volkan Sezer as an R&D company at ITU Arı Teknokent.",
+    about3a:"Autonombo was founded in 2026 by ",
+    profName:"Prof. Dr. Volkan Sezer",
+    profUrl:"https://akademi.itu.edu.tr/en/sezerv/",
+    about3b:" as an R&D company at ITU Arı Teknokent.",
     statusTitle:"Status",
     statusBody:"Currently in formation phase. We are shaping our first systems and collaborations, with initial deployments planned in the near future.",
     status:[{k:"Phase",v:"Formation"},{k:"Origin",v:"Istanbul Technical University"},{k:"Base",v:"Istanbul, Türkiye"},{k:"Open to",v:"Partners & pilots"}],
@@ -280,7 +285,10 @@ const COPY = {
     aboutTitle:"Hakkında",
     about1:"Autonombo, otonom hareketlilik ve akıllı robotik sistemler üzerine çalışan bir teknoloji şirketi. Araştırmalarımızın ve ilk mühendislik çalışmalarımızın büyük bölümünün yürütüldüğü İstanbul Teknik Üniversitesi ekosisteminden doğdu.",
     about2:"Ekipte lisanstan doktora sonrasına kadar her seviyeden, araştırmasını hâlen sürdüren araştırmacılar var; otonomi literatürüne katkı sağlamış ve öncü projelere imza atmış bir kadro. Bugüne kadar onlarca akademik ve endüstriyel projeyi başarıyla tamamladık.",
-    about3:"Autonombo, 2026 yılında Prof. Dr. Volkan Sezer tarafından İTÜ Arı Teknokent'te bir Ar-Ge firması olarak kurulmuştur.",
+    about3a:"Autonombo, 2026 yılında ",
+    profName:"Prof. Dr. Volkan Sezer",
+    profUrl:"https://akademi.itu.edu.tr/sezerv/",
+    about3b:" tarafından İTÜ Arı Teknokent'te bir Ar-Ge firması olarak kurulmuştur.",
     statusTitle:"Durum",
     statusBody:"Şu anda kuruluş aşamasındayız. İlk sistemlerimizi ve iş birliklerimizi şekillendiriyor, yakın gelecekte ilk saha uygulamalarını planlıyoruz.",
     status:[{k:"Aşama",v:"Kuruluş"},{k:"Kökeni",v:"İstanbul Teknik Üniversitesi"},{k:"Merkez",v:"İstanbul, Türkiye"},{k:"Açığız",v:"Ortaklık ve pilotlar"}],
@@ -312,8 +320,14 @@ function render(lang){
     a.appendChild(ul); svc.appendChild(a);
   });
 
-  const st = document.getElementById("status"); st.innerHTML = "";
-  t.status.forEach(r => { const d=el("div"); d.appendChild(el("span","k",r.k)); d.appendChild(el("span","v",r.v)); st.appendChild(d); });
+  const st = document.getElementById("status"); st.innerHTML = "";  t.status.forEach(r => { const d=el("div"); d.appendChild(el("span","k",r.k)); d.appendChild(el("span","v",r.v)); st.appendChild(d); });
+
+  const a3 = document.getElementById("about3"); a3.innerHTML = "";
+  a3.appendChild(document.createTextNode(t.about3a));
+  const a3link = el("a", null, t.profName);
+  a3link.href = t.profUrl; a3link.target = "_blank"; a3link.rel = "noopener";
+  a3.appendChild(a3link);
+  a3.appendChild(document.createTextNode(t.about3b));
 
   document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
   document.title = lang === "tr"
